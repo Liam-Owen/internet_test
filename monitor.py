@@ -5,12 +5,6 @@ import speedtest
 import datetime
 import time
 
-#Pandas library to clean and explore data returned
-import pandas as pd
-
-#Matplotlib package for data visualisation
-import matplotlib.pyplot as plt
-
 #Import CSV Package to save results
 import csv
 
@@ -42,7 +36,7 @@ with open('internet_speed_test.csv', mode='w') as speedcsv:
                 'upload speed':upload
     })
     
-    #10 Minute gap between checks
+    #5 Minute gap between checks
             time.sleep(300)
 
 
