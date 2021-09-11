@@ -8,6 +8,10 @@ import time
 #Import CSV Package to save results
 import csv
 
+#Import pydrive to connect to GoogleDrive API and upload output of test to Google Drive
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+
 #initialize speedtest
 speed=speedtest.Speedtest()
 
@@ -17,7 +21,7 @@ with open('internet_speed_test.csv', mode='w') as speedcsv:
     csv_writer.writeheader()
     
     #Set time for loop to end
-    endTime = datetime.datetime.now() + datetime.timedelta(minutes=120)
+    endTime = datetime.datetime.now() + datetime.timedelta(minutes=3)
     #Get internet speed with current time and convert to Mb/s
     while True:
         #If statement to check whether or not set time for the test to run has elapsed
@@ -37,9 +41,17 @@ with open('internet_speed_test.csv', mode='w') as speedcsv:
     })
     
     #5 Minute gap between checks
-            time.sleep(300)
+            time.sleep(60)
 
+#Upload internet_speed_test CSV to google drive
+gauth = GoogleAuth()
+gauth.LocalWebserverAuth()
 
+drive = GoogleDrive(gauth)
+
+file1 = drive.CreateFile({"mimeType": "text/csv"})
+file1.SetContentFile("internet_speed_test.csv")
+file1.Upload()
 
 
 
