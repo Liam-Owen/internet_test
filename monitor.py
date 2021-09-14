@@ -17,7 +17,7 @@ speed=speedtest.Speedtest()
 
 # Save results into a csv called internet_speed_test
 with open('internet_speed_test.csv', mode='w') as speedcsv:
-    csv_writer = csv.DictWriter(speedcsv, fieldnames=['date','time','download speed', 'upload speed'])
+    csv_writer = csv.DictWriter(speedcsv, fieldnames=['date', 'time', 'download speed', 'upload speed'])
     csv_writer.writeheader()
     
     # Set time for loop to end
@@ -28,10 +28,10 @@ with open('internet_speed_test.csv', mode='w') as speedcsv:
         if datetime.datetime.now() >= endTime:
             break
         else:
-            current_date = datetime.datetime.now('%d/%m/%Y')
+            current_date = datetime.datetime.now().strftime('%d/%m/%Y')
             current_time = datetime.datetime.now().strftime('%H:%M')
-            download= round((round(speed.download())/1048576),2)
-            upload= round((round(speed.upload())/1048576),2)
+            download= round((round(speed.download())/1048576), 2)
+            upload= round((round(speed.upload())/1048576), 2)
             print(f"Time: {current_time}, Download Speed: {download} Mb/s, Upload Speed: {upload} Mb/s.")
     
     # Write output to csv
